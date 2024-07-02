@@ -119,13 +119,7 @@ pipeline {
                 }
             }
         }
-        stage('Configure AWS Credentials') {
-            steps {
-                withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'aws-credentials']]) {
-                    sh 'aws configure list'  // Verify AWS CLI configuration
-                }
-            }
-        }
+
 
         stage('Fetch Kubeconfig-1') {
             steps {
