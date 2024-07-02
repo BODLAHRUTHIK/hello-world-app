@@ -80,19 +80,6 @@ pipeline {
             }
         }
 
-        stage('Git Clone') {
-            steps {
-                echo 'Cloning the GitHub repository'
-                checkout([$class: 'GitSCM',
-                          branches: [[name: "*/${env.GIT_BRANCH}"]],
-                          doGenerateSubmoduleConfigurations: false,
-                          extensions: [],
-                          submoduleCfg: [],
-                          userRemoteConfigs: [[url: env.GIT_REPO, credentialsId: env.GIT_CREDENTIALS_ID]]
-                ])
-            }
-        }
-
         stage('Build') {
             steps {
                 echo "Building Docker image here"
