@@ -25,6 +25,7 @@ pipeline {
         PATH = "/var/jenkins_home/bin:$PATH"
         AWS_CREDENTIALS_FILE = "${WORKSPACE}/.aws/credentials"
     }
+
     
 
     stages {
