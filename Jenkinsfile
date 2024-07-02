@@ -24,6 +24,7 @@ pipeline {
         AWS_ROLE_SESSION_NAME = 'JenkinsSession'
         PATH = "/var/jenkins_home/bin:$PATH"
         AWS_CREDENTIALS_FILE = "${WORKSPACE}/.aws/credentials"
+        GIT_COMMIT_SHA = sh(script: 'git rev-parse --short HEAD', returnStdout: true).trim()
     }
 
     
@@ -87,13 +88,13 @@ pipeline {
                 script {
                     echo "${REPO_DIR}"
                     dir("${REPO_DIR}/project-flask") {
-                        sh "docker build -t ${DOCKER_REPO}:${params.VERSION} ."
+                        sh "docker build -t ${DOCKER_REPO}:${GIT_COMMIT_SHA} ."
                     }
 
                     withCredentials([usernamePassword(credentialsId: env.DOCKER_CREDENTIALS_ID, usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
                         sh "docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD"
                     }
-                    sh "docker push ${DOCKER_REPO}:${params.VERSION}"
+                    sh "docker push ${DOCKER_REPO}:${GIT_COMMIT_SHA}"
                 }
             }
         }
@@ -138,7 +139,7 @@ pipeline {
                 script {
                     dir('my-flask-helm/new-chart') {
                             sh "helm dependency update"
-                            sh "helm upgrade --install my-app . --namespace apps --set image.tag=${params.VERSION}"
+                            sh "helm upgrade --install my-app . --namespace apps --set image.tag=${GIT_COMMIT_SHA}"
                         }
                 }
 
