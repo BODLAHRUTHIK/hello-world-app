@@ -10,6 +10,6 @@ def hello():
         d = {'data': "hello world"}
         return jsonify(d)
     
-print('tesig')
+print('tesg')
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=6123)
