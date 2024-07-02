@@ -10,7 +10,7 @@ def hello():
         d = {'data': "hello world"}
         return jsonify(d)
     
-#This is a commment
+#This is commment
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=6123)
