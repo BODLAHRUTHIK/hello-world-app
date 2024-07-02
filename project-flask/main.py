@@ -7,9 +7,8 @@ app = Flask(__name__)
 
 def hello():
     if request.method == 'GET':
-        d = {'data': "hello world"}
+        d = {'data': "hello world. welcome"}
         return jsonify(d)
-    
-print('tesg')
+
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=6123)
