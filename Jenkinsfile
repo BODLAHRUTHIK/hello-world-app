@@ -85,6 +85,7 @@ pipeline {
             steps {
                 echo "Building Docker image here"
                 script {
+                    echo "${REPO_DIR}"
                     dir("${REPO_DIR}/project-flask") {
                         sh "docker build -t ${DOCKER_REPO}:${params.VERSION} ."
                     }
