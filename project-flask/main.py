@@ -7,7 +7,7 @@ app = Flask(__name__)
 
 def hello():
     if request.method == 'GET':
-        d = {'data': "Hello!. pipeline is working"}
+        d = {'data': "Hello!. pipeline is working fine"}
         return jsonify(d)
 
 if __name__ == '__main__':
